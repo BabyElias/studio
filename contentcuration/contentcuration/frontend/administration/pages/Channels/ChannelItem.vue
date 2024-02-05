@@ -10,15 +10,22 @@
           <Checkbox v-model="selected" />
         </VFlex>
         <VFlex shrink>
-          <VTooltip v-if="channel.public && !channel.deleted" bottom z-index="200" lazy>
+          <VTooltip
+            v-if="channel.public && !channel.deleted"
+            disabled="true"
+            bottom
+            z-index="200"
+            lazy
+          >
             <template #activator="{ on }">
-              <span class="px-1 py-2" v-on="on">
-                <Icon color="light-green accent-4">
-                  $vuetify.icons.indicator
-                </Icon>
+              <span v-on="on">
+                <KIconButton
+                  class="px-1 py-2"
+                  icon="unpublishedResource"
+                  :tooltip="$tr('channelpublic')"
+                />
               </span>
             </template>
-            <span>This channel is public</span>
           </VTooltip>
         </VFlex>
         <VFlex class="text-truncate" grow style="max-width: 200px;">
@@ -255,6 +262,9 @@
           this.$store.dispatch('showSnackbarSimple', 'Source URL saved');
         });
       },
+    },
+    $trs: {
+      channelpublic: 'This channel is public',
     },
   };
 
