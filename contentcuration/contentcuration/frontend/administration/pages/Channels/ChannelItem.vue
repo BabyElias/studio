@@ -10,23 +10,19 @@
           <Checkbox v-model="selected" />
         </VFlex>
         <VFlex shrink>
-          <VTooltip
-            v-if="channel.public && !channel.deleted"
-            disabled="true"
-            bottom
-            z-index="200"
-            lazy
-          >
-            <template #activator="{ on }">
-              <span v-on="on">
-                <KIconButton
-                  class="px-1 py-2"
-                  icon="unpublishedResource"
-                  :tooltip="$tr('channelpublic')"
-                />
-              </span>
-            </template>
-          </VTooltip>
+          <template v-if="channel.public && !channel.deleted">
+            <KIcon
+              ref="tooltipRef"
+              class="mr-2"
+              icon="unpublishedResource"
+            />
+            <KTooltip
+              reference="tooltipRef"
+              :refs="$refs"
+            >
+              {{ $tr('channelpublic') }}
+            </KTooltip>
+          </template>
         </VFlex>
         <VFlex class="text-truncate" grow style="max-width: 200px;">
           <ActionLink
